@@ -19,7 +19,9 @@ class tcp_client {
   tcp_client();
   bool setup(std::string, int);
 
-  bool send(std::string);
+  bool Send(std::string);
+
+  std::string receive(int size = 4096);
 
 };
 

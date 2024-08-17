@@ -1,5 +1,6 @@
 #include "../include/client.h"
-#include <cstdio>
+#include <stdio.h>
+#include <string.h>
 #include <iostream>
 #include <netinet/in.h>
 #include <sys/socket.h>
@@ -31,4 +32,35 @@ bool tcp_client::setup(std::string address, int port) {
   }
   return true;
 }
+
+bool tcp_client::Send(std::string msg) {
+  if(sock_ != -1) {
+
+    if(send(sock_, msg.c_str(), strlen(msg.c_str()), 0) < 0) {
+      std::cout << "send failed. Error" << std::endl;
+      return false;
+    }
+
+  } else 
+    return false;
+  return true;
+}
+
+//TODO
+
+std::string tcp_client::receive(int size) {
+  char buffer[size];
+  memset(&buffer, 0, sizeof(buffer));
+
+  std::string reply;
+  if(recv(sock_, &buffer, sizeof(buffer), 0)){
+    std::cout << "receive failed. Error" << std::endl;
+    return nullptr;
+  }
+ 
+  buffer[size - 1] = '\0'; 
+  reply = buffer; 
+  return reply;
+}
+
 
