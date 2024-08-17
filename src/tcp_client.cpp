@@ -1,4 +1,4 @@
-#include "../include/client.h"
+#include "../include/tcp_client.h"
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
@@ -21,6 +21,8 @@ bool tcp_client::setup(std::string address, int port) {
       std::cout << "could not create socket" << std::endl;
     }
   }
+
+  port_ = port;
 
   server_.sin_port = htons(port_);
   server_.sin_family = AF_INET;

@@ -1,4 +1,4 @@
-#include "../include/server.h"
+#include "../include/tcp_server.h"
 #include <cstring>
 #include <iostream>
 #include <netinet/in.h>
@@ -69,4 +69,8 @@ int tcp_server::accepted() {
   pthread_create(&server_thread_[1], nullptr, task, (void*) ds); 
 
   return 0;
+}
+
+void tcp_server::closed() {
+  close(sockfd_);
 }

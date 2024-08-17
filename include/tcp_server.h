@@ -33,6 +33,8 @@ class tcp_server {
 
     int get_port() const;
 
+    void closed();
+
 };
 
 #endif // _SERVER_H_
